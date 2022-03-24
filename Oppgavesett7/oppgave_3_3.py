@@ -34,11 +34,17 @@ if __name__ =="__main__":
     mse = sse/dfe
 
     F = msg/mse
+    p = stats.f.sf(F,dfg,dfe)
+
+    string = f"""
+    df, sum sq, mean sq, F-value, Pr
+    {dfg}, {ssg:.2f}, {msg:.2f}, {F:.2f}  {p:.3f}
+    {dfe}, {sse:.2f}, {mse:.2f}
+    """
+    print(string)
 
     p_values = {}
     p_values_less_a = {}
-
-
     for key in types_of_food:
         for key2 in types_of_food:
             if key != key2:
