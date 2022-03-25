@@ -9,5 +9,5 @@ df_sk.boxplot()
 df_fb.hist()
 df_sk.hist()
 plt.figure()
-
+df_fb.boxplot()
 plt.show()
