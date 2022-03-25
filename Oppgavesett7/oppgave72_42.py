@@ -7,6 +7,3 @@ p = stats.f_oneway(df['DallasCowboys'],df['GreenBayPackers'],df['DenverBroncos']
 print(p)
 
 #betingelsene for anova?
-
-fig1 = plt.figure()
-fig1.subplot(1.)
