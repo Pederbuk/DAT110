@@ -1,51 +1,66 @@
 import pandas as pd
-from sklearn import linear_model
-import statsmodels.api as sm
+import statsmodels.formula.api as sm
 import matplotlib.pyplot as plt
 
 data = pd.read_csv('babies.csv')
-data = data.dropna()
-x = data.drop(['case','bwt'],axis=1)
-y = data['bwt']
 
-regr = linear_model.LinearRegression()
-regr.fit(x,y)
+model = sm.ols(formula="bwt ~ gestation + parity + age + height + weight + smoke", data=data).fit()
+print(model.summary())
 
-print(f'intercep = {regr.intercept_}, coefficients = {regr.coef_}')
-
-x = sm.add_constant(x)
-mlr = sm.OLS(y,x).fit()
-print_mlr = mlr.summary()
-print(print_mlr)
 
 plt.figure()
-plt.title('Histograms')
 plt.subplot(231)
+plt.title('gestation')
 plt.hist(data['gestation'])
 plt.subplot(232)
+plt.title('Parity')
 plt.hist(data['parity'])
 plt.subplot(233)
+plt.title('age')
 plt.hist(data['age'])
 plt.subplot(234)
+plt.title('weight')
 plt.hist(data['weight'])
 plt.subplot(235)
+plt.title('smoke')
 plt.hist(data['smoke'])
 plt.show()
 
 plt.figure()
-plt.title('Scatter')
 plt.subplot(231)
+plt.title('Gestation')
 plt.scatter(data['bwt'], data['gestation'])
 plt.subplot(232)
+plt.title('parity')
 plt.scatter(data['bwt'], data['parity'])
 plt.subplot(233)
+plt.title('age')
 plt.scatter(data['bwt'], data['age'])
 plt.subplot(234)
+plt.title('weight')
 plt.scatter(data['bwt'], data['weight'])
 plt.subplot(235)
+plt.title('Smoke')
 plt.scatter(data['bwt'], data['smoke'])
 plt.show()
 
+plt.figure()
+plt.subplot(231)
+plt.title('Gestation')
+plt.scatter(data['case'], data['gestation'])
+plt.subplot(232)
+plt.title('parity')
+plt.scatter(data['case'], data['parity'])
+plt.subplot(233)
+plt.title('age')
+plt.scatter(data['case'], data['age'])
+plt.subplot(234)
+plt.title('weight')
+plt.scatter(data['case'], data['weight'])
+plt.subplot(235)
+plt.title('Smoke')
+plt.scatter(data['case'], data['smoke'])
+plt.show()
 
 
 
